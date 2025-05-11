@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Fill Application Form</title>
+  <link rel="stylesheet" href="../css/form.css" />
+
+  <!-- Add these to your head section -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+</head>
+
+<body oncontextmenu="return false" onkeydown="return disableShortcuts(event)">
+  <div class="container">
+    <div class="left-preview" id="formPreview">
+      <!-- Live form preview will be injected here -->
+      <div class="overlay"></div>
+      <iframe src="../applicationForms/STC.html" frameborder="0" id="previewFrame" ></iframe>
+    </div>
+
+    <div class="right-form">
+      <h1>Fill Your Application</h1> <br>
+      <h5>General Details</h5>
+      <form id="applicationForm" class="appform">
+        <label for="firstName"><b>Your First Name</b>: *&nbsp;</label>
+        <input type="text" name="FnamePreview" placeholder="First Name" data-target="FnamePreview"  />
+        <br /><br />
+
+        <label for="middleName"><b>Your Middle Name</b>: &nbsp;</label>
+        <input type="text" name="MnamePreview" placeholder="Middle Name" data-target="MnamePreview" /><br /><br />
+
+        <label for="lastName"><b>Your Last Name</b>: &nbsp;</label>
+        <input type="text" name="LnamePreview" placeholder="Last Name" data-target="LnamePreview" />
+        <br /><br />
+
+        <label for="photoUpload"><b>Upload Your Image</b>: * &nbsp;</label>
+        <input type="file" accept="image/*" data-target="userPhoto" id="profileImage"  />
+        <button type="button" id="removePhoto" style="display: none">
+          Remove Photo
+        </button>
+        <br /><br />
+        <!-- Modal HTML -->
+        <div id="cropperModal">
+          <div id="cropperContainer">
+            <img id="imageToCrop" src="" alt="Image to Crop" />
+            <div id="buttonContainer">
+              <button id="cropButton">Crop & Upload</button>
+              <button id="cancelButton">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        <label for="gender"><b>Gender</b>: *&nbsp; &nbsp;</label>
+        <input type="radio" name="male" value="✔" data-target="male"  />
+        <label for="maleRadio">&nbsp;Male&nbsp;&nbsp;&nbsp;</label>
+        <input type="radio" name="female" value="✔" data-target="female"  />
+        <label for="femaleRadio">&nbsp;Female</label><br /><br />
+
+        <label for="Martial_Status"><b>Martial Status</b>: * &nbsp; &nbsp;</label>
+        <input type="radio" name="Martial_Status" value="✔" data-target="single"  />
+        <label for="single">&nbsp;Single&nbsp;&nbsp;&nbsp;</label>
+        <input type="radio" name="Martial_Status" value="✔" data-target="married"  />
+        <label for="marrried">&nbsp;Married</label><br /><br />
+
+        <label for="nationality"><b>Nationality</b>: *&nbsp;</label>
+        <input type="text" name="nationality" placeholder="Nationality" data-target="nationality"  />
+        <br /><br />
+
+
+        <label for="Jap_Nat"><b>Japanese Nationality</b>: *&nbsp; &nbsp;</label>
+        <input type="radio" name="Jap_Nat" value="✔" data-target="no"  />
+        <label for="no">&nbsp;NO&nbsp;&nbsp;&nbsp;</label>
+        <input type="radio" name="Jap_Nat" value="✔" data-target="yes"  />
+        <label for="yes">&nbsp;Yes</label><br /><br />
+
+        <label for="Jap_Nat"><b>If Yes, Experation Date</b>: &nbsp;</label>
+        <input type="month" name="Jap_NatMonth" data-date-target="Jap_NatMonth" data-year-target="exYear" data-month-target="exMonth"
+          data-split-target="true" />
+        <br /><br />
+
+        <label for="dob"><b>Date of Birth</b>: *&nbsp;</label>
+        <input type="date" name="dob" data-date-target="dob" data-year-target="dobYear" data-month-target="dobMonth"
+          data-day-target="dobDay"   />
+        <br /><br />
+
+        <label for="age"><b>Age</b>: *&nbsp;</label>
+        <input type="number" name="age" placeholder="AGE as of 2025-04-15" data-target="age"  />
+        <br /><br /> <br>
+
+        <label for="address"><b>Current Address</b>: *&nbsp;</label> <br><br>
+        <textarea name="address" placeholder="Current Address" style="width: 100%; height: 100px" data-target="address"
+          data-counter="charCount" maxlength="150" ></textarea>
+        <div id="charCount" style="
+              margin-right: 10px;
+              text-align: right;
+              font-size: 12px;
+              color: gray;
+            ">
+          0 / 150
+        </div>
+        <br />
+
+        <label for="country"><b>Country</b>: *&nbsp;</label>
+        <input type="text" name="country" placeholder="Country" data-target="country" style="width: 80%; height: 40px"
+          data-counter="coutCount" maxlength="30" ></input>
+        <div id="coutCount" style="
+              margin-right: 30px;
+              text-align: right;
+              font-size: 12px;
+              color: gray;
+            ">
+          0 / 30
+        </div>
+        <br /> <br>
+
+        <label for="jap_resident"><b>If you currently in Japan, What is your Current resident Status</b>:
+          &nbsp;</label><br><br>
+        <input type="text" name="jap_resident" placeholder="Residential Status" data-target="jap_resident"
+          style="width: 100%; height: 40px" data-counter="jap_resCount" maxlength="40"></input>
+        <div id="jap_resCount" style="
+              margin-right: 10px;
+              text-align: right;
+              font-size: 12px;
+              color: gray;
+            ">
+          0 / 40
+        </div>
+        <br />
+
+
+        <label for="YABDTJ"><b>Your Adress before departure to Japan</b>: *&nbsp; &nbsp;</label><br><br>
+        <input type="radio" name="YABDTJ" value="✔" data-target="SAB"  />
+        <label for="SAB">&nbsp;Same as Current Address&nbsp;&nbsp;&nbsp;</label><br><br>
+        <input type="radio" name="YABDTJ" value="✔" data-target="TAAWCAF"  />
+        <label for="TAAWCAF">&nbsp;The Current Address Willl Change as Follows</label><br />
+        <textarea name="YABDTJ" placeholder="Your Adress before departure to Japan" style="width: 100%; height: 70px"
+          data-target="YABDTJ" data-counter="YABDTJCount" maxlength="70"></textarea>
+        <div id="YABDTJCount" style="
+              margin-right: 10px;
+              text-align: right;
+              font-size: 12px;
+              color: gray;
+            ">
+          0 / 70
+        </div><br>
+        <input type="text" name="YABDTJcountry" placeholder="Your Country before Departure to Japan"
+          data-target="YABDTJcountry" style="width: 100%; height: 40px" data-counter="YABDTJcountryCount" maxlength="30"></input>
+        <div id="YABDTJcountryCount" style="
+              margin-right: 10px;
+              text-align: right;
+              font-size: 12px;
+              color: gray;
+            ">
+          0 / 30
+        </div>
+        <br /> <br>
+
+        <label for="air_Ticket"><b>If your address before departure for Japan is outside your home country, do you
+            understand that an airline ticket to Japan will not be provided?</b>: *&nbsp; &nbsp;</label><br><br>
+        <input type="radio" name="air_Ticket" value="✔" data-target="air_TicketYes"  />
+        <label for="air_TicketYes">&nbsp;Yes&nbsp;&nbsp;&nbsp;</label>
+        <input type="radio" name="air_Ticket" value="✔" data-target="air_TicketNo"  />
+        <label for="air_TicketNo">&nbsp;No</label><br /><br />
+
+        <label for="Japanese_diplomatic_office"><b>Name of Japanese diplomatic office where you will apply for visa
+            issuance</b>: *&nbsp;</label><br>
+        <input type="text" name="Japanese_diplomatic_office" placeholder="Name Japanese diplomatic office"
+          data-target="Japanese_diplomatic_office"  style="width: 100%;" /><br /><br />
+
+        <label for="phoneNo"><b>Phone Number</b>: *&nbsp;</label>
+        <input type="tel" name="phoneNo" placeholder="Phone Number" data-target="phoneNo"  /><br /><br />
+
+        <label for="email"><b>Email Address</b>: *&nbsp;</label>
+        <input type="email" name="email" placeholder="Email Address" data-target="email" 
+          style="width: 60%;" /><br /><br /><br><br>
+
+      </form>
+
+
+      <h5>Education/Current Status</h5><br>
+      <form id="applicationForm" class="appform">
+
+
+        <label for="presentStatus"><b>Present Status</b>: *&nbsp; &nbsp;</label><br><br>
+        <input type="radio" name="presentStatus" value="✔" data-target="student"  />
+        <label for="presentStatus">&nbsp;Student&nbsp;&nbsp;&nbsp;</label>
+        <textarea name="Name_School" placeholder="Name of your School" style="width: 100%; height: 70px"
+          data-target="Name_School" data-counter="Name_SchoolCount" maxlength="75"></textarea>
+        <div id="Name_SchoolCount" style="
+              margin-right: 10px;
+              text-align: right;
+              font-size: 12px;
+              color: gray;
+            ">
+          0 / 75
+        </div><br>
+
+        <input type="radio" name="presentStatus" value="✔" data-target="employed"  />
+        <label for="presentStatus">&nbsp;Employed&nbsp;&nbsp;&nbsp;</label>
+        <textarea name="Employed" placeholder="Name of your Orgnization" style="width: 100%; height: 70px"
+          data-target="Name_Org" data-counter="employedCount" maxlength="75"></textarea>
+        <div id="employedCount" style="
+              margin-right: 10px;
+              text-align: right;
+              font-size: 12px;
+              color: gray;
+            ">
+          0 / 75
+        </div><br>
+
+        <input type="radio" name="presentStatus" value="✔" data-target="others"  />
+        <label for="presentStatus">&nbsp;Others&nbsp;&nbsp;&nbsp;</label>
+        <textarea name="Others" placeholder="What is your Present Status" style="width: 100%; height: 70px"
+          data-target="othersStat" data-counter="othersStatCount" maxlength="95"></textarea>
+        <div id="othersStatCount" style="
+              margin-right: 10px;
+              text-align: right;
+              font-size: 12px;
+              color: gray;
+            ">
+          0 / 95
+        </div><br>
+
+        <label for="fieldStudyinHS"><b>Specialized field of study in High School or University</b>:
+          *&nbsp;</label><br><br>
+        <textarea name="fieldStudyinHS" placeholder="Specialized field of study in High School or University"
+          style="width: 100%; height: 70px" data-target="fieldStudyinHS" data-counter="fieldStudyinHSCount"
+          maxlength="110"></textarea>
+        <div id="fieldStudyinHSCount" style="
+              margin-right: 10px;
+              text-align: right;
+              font-size: 12px;
+              color: gray;
+            ">
+          0 / 110
+        </div><br><br><br><br>
+      </form>
+
+
+
+      <h5>Primary Education*</h5>
+      <label><b>Elementory School (Upto 5th Standard/Class)</b>&nbsp; &nbsp;</label><br><br><br><br>
+
+      <form id="applicationForm" class="appform">
+
+        <label for="PschoolName"><b>School Name</b>: *&nbsp;</label>
+        <input type="text" name="PschoolName" placeholder="Primary School Name" data-target="PschoolName"
+           /><br /><br />
+
+        <label for="Pstate"><b>State/Province</b>: *&nbsp;</label>
+        <input type="text" name="Pstate" placeholder="State/Province" data-target="Pstate"  /><br /><br />
+
+        <label for="Pcity"><b>City/Town</b>: *&nbsp;</label>
+        <input type="text" name="Pcity" placeholder="City/Town" data-target="Pcity"  /><br /><br />
+
+        <label for="PFmonth"><b>From</b>: *&nbsp;</label>
+        <input type="month" data-date-target="PFMonth" name="PFMonth" data-year-target="PFyear" data-month-target="PFmonth"
+           /> <br><br>
+        <label for="PTmonth"><b>To</b>: *&nbsp;</label>
+        <input type="month" data-date-target="PTMonth" name="PTMonth" data-year-target="PTyear" data-month-target="PTmonth"
+           /> <br><br>
+
+        <label for="Pyrs"><b>Total Years of Primary Schooling</b>: *&nbsp;</label>
+        <input type="number" name="Pyrs" placeholder="Total Years" data-target="Pyrs"  style="width: 100px;"/>
+        <br /><br />
+
+        <label for="Premarks"><b>Remarks</b>:&nbsp;</label>
+        <input type="text" name="Premarks" placeholder="Remarks" data-target="Premarks" /><br><br><br><br>
+      </form>
+
+      <h5>Lower Secondary Education*</h5>
+      <label><b>Middle/Junior High School (From 6th-8th Standard/Class)</b>&nbsp; &nbsp;</label><br><br><br><br>
+
+      <form id="applicationForm" class="appform">
+
+        <label for="LSschoolName"><b>School Name</b>: *&nbsp;</label>
+        <input type="text" name="LSschoolName" placeholder="School Name" data-target="LSschoolName"
+           /><br /><br />
+
+        <label for="LSstate"><b>State/Province</b>: *&nbsp;</label>
+        <input type="text" name="LSstate" placeholder="State/Province" data-target="LSstate"  /><br /><br />
+
+        <label for="LScity"><b>City/Town</b>: *&nbsp;</label>
+        <input type="text" name="LScity" placeholder="City/Town" data-target="LScity"  /><br /><br />
+
+        <label for="LSFmonth"><b>From</b>: *&nbsp;</label>
+        <input type="month" data-date-target="LSFMonth" name="LSFMonth" data-year-target="LSFyear"
+          data-month-target="LSFmonth"  /> <br><br>
+        <label for="LSTmonth"><b>To</b>: *&nbsp;</label>
+        <input type="month" data-date-target="LSTMonth" name="LSTMonth" data-year-target="LSTyear"
+          data-month-target="LSTmonth"  /> <br><br>
+
+        <label for="LSyrs"><b>Total Years of Middle Schooling</b>: *&nbsp;</label>
+        <input type="number" name="LSyrs" placeholder="Total Years" data-target="LSyrs"  style="width: 100px;"/>
+        <br /><br />
+
+        <label for="LSremarks"><b>Remarks</b>:&nbsp;</label>
+        <input type="text" name="LSremarks" placeholder="Remarks" data-target="LSremarks" /><br><br><br><br>
+      </form>
+
+
+      <h5>Upper Secondary Education*</h5>
+      <label><b>Senior/High School (From 9th-12th Standard/Class or equivalent)</b>&nbsp; &nbsp;</label><br><br><br><br>
+
+      <form id="applicationForm" class="appform">
+
+        <label for="USschoolName"><b>School Name</b>: *&nbsp;</label>
+        <input type="text" name="USschoolName" placeholder="School Name" data-target="USschoolName"
+           /><br /><br />
+
+        <label for="USstate"><b>State/Province</b>: *&nbsp;</label>
+        <input type="text" name="USstate" placeholder="State/Province" data-target="USstate"  /><br /><br />
+
+        <label for="UScity"><b>City/Town</b>: *&nbsp;</label>
+        <input type="text" name="UScity" placeholder="City/Town" data-target="UScity"  /><br /><br />
+
+        <label for="USFmonth"><b>From</b>: *&nbsp;</label>
+        <input type="month" data-date-target="USFMonth" name="USFMonth" data-year-target="USFyear"
+          data-month-target="USFmonth"  /> <br><br>
+        <label for="USTmonth"><b>To</b>: *&nbsp;</label>
+        <input type="month" data-date-target="USTMonth" name="USTMonth" data-year-target="USTyear"
+          data-month-target="USTmonth"  /> <br><br>
+
+        <label for="USyrs"><b>Total Years of High Schooling</b>: *&nbsp;</label>
+        <input type="number" name="USyrs" placeholder="Total Years" data-target="USyrs"  style="width: 100px;"/>
+        <br /><br />
+
+        <label for="USremarks"><b>Remarks</b>:&nbsp;</label>
+        <input type="text" name="USremarks" placeholder="Remarks" data-target="USremarks" /><br><br><br><br>
+      </form>
+
+      <h5>Tertiary (Higher) Education</h5>
+      <label><b>Undergraduate</b>&nbsp; &nbsp;</label><br><br><br><br>
+
+      <form id="applicationForm" class="appform">
+
+        <label for="TschoolName"><b>School Name</b>:&nbsp;</label>
+        <input type="text" name="TschoolName" placeholder="School Name" data-target="TschoolName" /><br /><br />
+
+        <label for="Tstate"><b>State/Province</b>:&nbsp;</label>
+        <input type="text" name="Tstate" placeholder="State/Province" data-target="Tstate" /><br /><br />
+
+        <label for="Tcity"><b>City/Town</b>:&nbsp;</label>
+        <input type="text" name="Tcity" placeholder="City/Town" data-target="Tcity" /><br /><br />
+
+        <label for="TFmonth"><b>From</b>:&nbsp;</label>
+        <input type="month" data-date-target="TFMonth" name="TFMonth" data-year-target="TFyear"
+          data-month-target="TFmonth" /> <br><br>
+        <label for="TTmonth"><b>To</b>:&nbsp;</label>
+        <input type="month" data-date-target="TTMonth" name="TTMonth" data-year-target="TTyear"
+          data-month-target="TTmonth" /> <br><br>
+
+        <label for=Tyrs"><b>Total Years of Tertiary Education</b>:&nbsp;</label>
+        <input type="number" name="Tyrs" placeholder="Total Years" data-target="Tyrs" style="width: 100px;"/>
+        <br /><br />
+
+        <label for="TStatus"><b>Status</b>: &nbsp; &nbsp;</label><br><br>
+        <input type="radio" name="TStatus" value="✔" data-target="Graduated" />
+        <label for="TStatus">&nbsp;Graduated&nbsp;&nbsp;&nbsp;</label><br><br>
+
+        <input type="radio" name="TStatus" value="✔" data-target="EGraduated" />
+        <label for="TStatus">&nbsp;Expected to Graduate&nbsp;&nbsp;&nbsp;</label><br><br>
+
+        <input type="radio" name="TStatus" value="✔" data-target="otherStatus" />
+        <label for="TStatus">&nbsp;Other Status (Add Remarks)&nbsp;&nbsp;&nbsp;</label><br><br>
+
+
+        <label for="Tremarks"><b>Remarks</b>:&nbsp;</label>
+        <input type="text" name="Tremarks" placeholder="Remarks" data-target="Tremarks" /><br><br><br><br>
+
+        <label for="TYSchooling"><b>Total years of Schooling Attended as of April 1, 2024</b>: *&nbsp;</label>
+        <input type="text" name="TYSchooling" placeholder="Total Years" data-target="TYSchooling" 
+          style="width: 100px;" /><br><br>
+
+        <label for="TSRemarks"><b>Remarks</b>: &nbsp;</label> <br><br>
+        <textarea name="TSRemarks"
+          placeholder="You may use the space if the space of the above Remarks column is insufficient"
+          style="width: 100%; height: 100px" data-target="TSRemarks" data-counter="TSRemarksCount"
+          maxlength="230"></textarea>
+        <div id="TSRemarksCount" style="
+              margin-right: 10px;
+              text-align: right;
+              font-size: 12px;
+              color: gray;
+            ">
+          0 / 230
+        </div>
+        <br><br><br><br>
+      </form>
+
+      <h5>Scholarship History & Conditions</h5>
+      <form id="applicationForm" class="appform">
+
+        <label for="MEXTBefore"><b>Have you been awarded a Japanese Government (MEXT) Scholarship in the past? if 'Yes',
+            you are NOT eligible to apply.</b>: *&nbsp; &nbsp;</label><br><br>
+        <input type="radio" name="MEXTBefore" value="✔" data-target="MEXTBeforeYES"  />
+        <label for="MEXTBefore">&nbsp;Yes&nbsp;&nbsp;&nbsp;</label><br><br>
+
+        <input type="radio" name="MEXTBefore" value="✔" data-target="MEXTBeforeNO"  />
+        <label for="MEXTBefore">&nbsp;NO&nbsp;&nbsp;&nbsp;</label><br><br><br>
+
+        <label for="MEXTBefore"><b>NOTE</b>:&nbsp; Unsure whether previously awarded financial aid corresponds to a MEXT
+          Scholarship or not, please consult in advance with a Japanese diplomatic office. &nbsp;</label><br><br><br>
+
+        <label for="OtherMEXT"><b>Are you applying for any other Japanese Government (MEXT) Scholarships
+            (including the programs for which scholarship payments will begin in FY2023, although their final selection
+            results have not been decided yet, and the programs for which scholarship payments will begin in FY2024)?
+            It is not allowed to apply for other Japanese Government
+            (MEXT) Scholarships at the same time.</b>: *&nbsp; &nbsp;</label><br><br>
+        <input type="radio" name="OtherMEXT" value="✔" data-target="OtherMEXTYES"  />
+        <label for="OtherMEXT">&nbsp;Yes&nbsp;&nbsp;&nbsp;</label><br><br>
+
+        <input type="radio" name="OtherMEXT" value="✔" data-target="OtherMEXTNO"  />
+        <label for="OtherMEXT">&nbsp;NO&nbsp;&nbsp;&nbsp;</label><br><br>
+
+        <label for="OtherScholarship"><b>Are you receiving or scheduled to be receiving any scholarship from any
+            organization other than the Japanese Government
+            (MEXT) (including an organization of your home country government) together with the MEXT Scholarship?</b>:
+          *&nbsp; &nbsp;</label><br><br>
+        <input type="radio" name="OtherScholarship" value="✔" data-target="OtherScholarshipYES"
+           />
+        <label for="OtherScholarship">&nbsp;Yes&nbsp;&nbsp;&nbsp;</label><br><br>
+
+        <input type="radio" name="OtherScholarship" value="✔" data-target="OtherScholarshipNO"
+           />
+        <label for="OtherScholarship">&nbsp;NO&nbsp;&nbsp;&nbsp;</label><br><br>
+
+        <label for="OtherScholarshipIFYes"><b>If 'YES', do you understand you must cancel other scholarships after
+            selected for MEXT Scholarship Student since it is notはいいいえ
+            allowed to receive other scholarships together with the MEXT Scholarship?</b>:&nbsp; &nbsp;</label><br><br>
+        <input type="radio" name="OtherScholarshipIFYesYES" value="✔"
+          data-target="OtherScholarshipIFYesYES" />
+        <label for="OtherScholarshipIFYes">&nbsp;Yes&nbsp;&nbsp;&nbsp;</label><br><br>
+
+        <input type="radio" name="OtherScholarshipIFYesNO" value="✔"
+          data-target="OtherScholarshipIFYesNO"  />
+        <label for="OtherScholarshipIFYes">&nbsp;NO&nbsp;&nbsp;&nbsp;</label><br><br>
+
+
+        <label for="ALRScholarships"><b>If you are receiving or applying for other scholarships, please specify the name
+            of the sponsor, scholarship period, scholarship amount, etc.</b>:&nbsp;</label> <br><br>
+        <textarea name="ALRScholarships" placeholder="Name of sponsor, period and amount of the scholarship"
+          style="width: 100%; height: 100px" data-target="ALRScholarships" data-counter="ALRScholarshipsCount"
+          maxlength="200"></textarea>
+        <div id="ALRScholarshipsCount" style="
+              margin-right: 10px;
+              text-align: right;
+              font-size: 12px;
+              color: gray;
+            ">
+          0 / 200
+        </div>
+        <br><br><br><br>
+
+      </form>
+
+
+      <h5>Field of Study</h5>
+      <label><b>Select from the Annex "Majors and Related Subjects for Fields of Study". If you enter a second choice,
+          ensure that it is
+          from the same field of study as your first choice.</b>&nbsp;</label><br><br><br>
+      <form id="applicationForm" class="appform">
+
+        <label for="studyCode"><b>Field of Study Code</b>: *&nbsp;</label>
+        <input type="text" name="studyCode" placeholder="Field of Study Code" data-target="studyCode"
+           /><br><br>
+
+
+        <label for="studyName"><b>Name of field of study</b>: *&nbsp;</label>
+        <input type="text" name="studyName" placeholder="Name of field of study" data-target="studyName"
+           /><br><br><br>
+
+        <label for="studyNamechoice"><b>Name of subjects</b>:&nbsp;</label><br><br>
+        <label for="studyNamechoice"><b>First choice</b>: *&nbsp;</label>
+        <input type="text" name="studyNameFchoice" placeholder="Name of Subject" data-target="studyNameFchoice"
+           /><br><br>
+
+        <label for="studyNamechoice"><b>Second choice</b>: *&nbsp;</label>
+        <input type="text" name="studyNameSchoice" placeholder="Name of Subject" data-target="studyNameSchoice"
+           /><br><br>
+
+        <label for="reasonChoice"><b>Specify the reasons why you selected each "field of study" and
+            "subject"</b>.&nbsp;</label><br><br>
+        <label for="reasonChoice"><b>First choice</b>: *&nbsp;</label><br><br>
+        <textarea name="reasonChoice" placeholder="Specify the reasons of your Fisrt Choice"
+          style="width: 100%; height: 100px" data-target="reasonChoiceFC" data-lower-case="true"
+          data-counter="reasonChoiceFCCount" maxlength="600" ></textarea>
+        <div id="reasonChoiceFCCount" style="
+              margin-right: 10px;
+              text-align: right;
+              font-size: 12px;
+              color: gray;
+            ">
+          0 / 600
+        </div><br><br>
+
+        <label for="reasonChoice"><b>Second choice</b>: *&nbsp;</label><br><br>
+        <textarea name="reasonChoice" placeholder="Specify the reasons of your Second Choice"
+          style="width: 100%; height: 100px" data-target="reasonChoiceSC" data-lower-case="true"
+          data-counter="reasonChoiceSCCount" maxlength="600" ></textarea>
+        <div id="reasonChoiceSCCount" style="
+                margin-right: 10px;
+                text-align: right;
+                font-size: 12px;
+                color: gray;
+              ">
+          0 / 600
+        </div><br><br>
+
+
+        <label for="interestJapan"><b>What was the trigger for having an interest in Japan?</b>: *&nbsp;</label><br><br>
+        <textarea name="interestJapan" placeholder="What was the trigger for having an interest in Japan?"
+          style="width: 100%; height: 100px" data-target="interestJapan" data-lower-case="true"
+          data-counter="interestJapanCount" maxlength="650" ></textarea>
+        <div id="interestJapanCount" style="
+              margin-right: 10px;
+              text-align: right;
+              font-size: 12px;
+              color: gray;
+            ">
+          0 / 650
+        </div><br><br>
+
+        <label for="contributeJapan"><b>What kinds of things do you think you can contribute to Japan and your home
+            country through your experience of studying in Japan?</b>: *&nbsp;</label><br><br>
+        <textarea name="contributeJapan"
+          placeholder="What kinds of things do you think you can contribute to Japan and your home country through your experience of studying in Japan?"
+          style="width: 100%; height: 100px" data-target="contributeJapan" data-lower-case="true"
+          data-counter="contributeJapanCount" maxlength="750" ></textarea>
+        <div id="contributeJapanCount" style="
+            margin-right: 10px;
+            text-align: right;
+            font-size: 12px;
+            color: gray;
+          ">
+          0 / 750
+        </div><br><br><br><br>
+
+      </form>
+
+      <h5>Language ability</h5>
+      <label><b>Self-rate on a scale of 0 to 3.</b>&nbsp;
+        <ul style="position: relative; left: 28px;">
+          <li><b>0</b> = Poor</li>
+          <li><b>1</b> = Fair</li>
+          <li><b>2</b> = Good</li>
+          <li><b>3</b> = Excellent</li>
+        </ul>
+      </label><br><br>
+      <form id="applicationForm" class="appform">
+
+        <label for="Language"><b>Japanese</b>: *&nbsp;</label><br><br>
+        <input type="number" name="japLangread" placeholder="Reading" data-target="japLangread" 
+          style="width: 100px;" />
+
+        <input type="number" name="japLangwrite" placeholder="Writing" data-target="japLangwrite" 
+          style="width: 100px;" />
+
+        <input type="number" name="japLangspeak" placeholder="Speaking" data-target="japLangspeak" 
+          style="width: 100px;" />
+
+        <input type="number" name="japLanglisten" placeholder="Listening" data-target="japLanglisten" 
+          style="width: 100px;" /><br><br>
+
+        <label for="Language"><b>English</b>: *&nbsp;</label><br><br>
+        <input type="number" name="engLangread" placeholder="Reading" data-target="engLangread" 
+          style="width: 100px;" />
+
+        <input type="number" name="engLangwrite" placeholder="Writing" data-target="engLangwrite" 
+          style="width: 100px;" />
+
+        <input type="number" name="engLangspeak" placeholder="Speaking" data-target="engLangspeak" 
+          style="width: 100px;" />
+
+        <input type="number" name="engLanglisten" placeholder="Listening" data-target="engLanglisten" 
+          style="width: 100px;" /><br><br>
+
+
+        <label for="Language"><b>Others</b>:&nbsp;</label><br><br>
+        <label for="Language"><b>Language Name</b>:&nbsp;</label>
+        <input type="text" name="otherLangname" placeholder="Language Name" data-target="otherLangname" /> <br><br>
+
+        <input type="number" name="otherLangread" placeholder="Reading" data-target="otherLangread"
+          style="width: 100px;" />
+
+        <input type="number" name="otherLangwrite" placeholder="Writing" data-target="otherLangwrite"
+          style="width: 100px;" />
+
+        <input type="number" name="otherLangspeak" placeholder="Speaking" data-target="otherLangspeak"
+          style="width: 100px;" />
+
+        <input type="number" name="otherLanglisten" placeholder="Listening" data-target="otherLanglisten"
+          style="width: 100px;" /><br><br>
+
+
+        <label for="LanguageQualification"><b>Japanese Language Qualifications</b>&nbsp;</label><br><br>
+        <label for="LanguageQualification"><b>JLPT</b>:&nbsp;</label>
+        <input type="text" name="LanguageQualification" placeholder="level" data-target="LangJLPTlvl"
+          style="width: 100px;" />
+
+        <input type="text" name="LanguageQualification" placeholder="Score" data-target="LangJLPTscore"
+          style="width: 100px;" /><br><br>
+
+
+        <label for="Language"><b>Others</b>:&nbsp;</label>
+        <input type="text" name="LanguageQualification" placeholder="Ex: EJU Score: n/450" data-target="otherLangJap" />
+        <br><br>
+
+        <label for="LanguageQualification"><b>English Language Qualifications</b>&nbsp;</label><br><br>
+        <label for="LanguageQualification"><b>TOEFL</b>:&nbsp;</label><br><br>
+        <label for="LanguageQualification"><b>iBT</b>:&nbsp;</label>
+        <input type="text" name="LanguageQualification" placeholder="iBT" data-target="LangiBT" style="width: 100px;" /><BR></BR>
+
+        <label for="LanguageQualification"><b>Other Type</b>:&nbsp;</label>
+        <input type="text" name="LanguageQualification" placeholder="Name" data-target="otherLangtype"
+          style="width: 100px;" />
+        <input type="text" name="LanguageQualification" placeholder="Score" data-target="otherLangscore"
+          style="width: 100px;" /><br><br>
+
+        <label for="LanguageQualification"><b>IELTS</b>:&nbsp;</label>
+        <input type="text" name="LanguageQualification" placeholder="Score" data-target="LangIELTS" /> <br><br>
+
+
+        <label for="LanguageQualification"><b>Others</b>:&nbsp;</label>
+        <input type="text" name="LanguageQualification" placeholder="Other Qualification" data-target="otherLangQua" />
+        <br><br><br><br>
+
+
+      </form>
+
+
+
+
+
+      <h5>Emergency Contact</h5>
+      <form id="applicationForm" class="appform">
+
+        <label for="EmerfirstName"><b>Full Name</b>: *&nbsp;</label>
+        <input type="text" name="EmerfirstName" placeholder="Full Name" data-target="EmerfirstName"  />
+        <br /><br />
+
+        <label for="EmerRelationShip"><b>Relationship</b>: *&nbsp;</label>
+        <input type="text" name="EmerRelationShip" placeholder="Relationship" data-target="EmerRelationShip"  />
+        <br /><br />
+
+
+        <label for="Emeraddress"><b>Current Address</b>: *&nbsp;</label> <br><br>
+        <textarea name="Emeraddress" placeholder="Current Address" style="width: 100%; height: 100px"
+          data-target="Emeraddress" data-counter="EmeraddressCount" maxlength="150" ></textarea>
+        <div id="EmeraddressCount" style="
+              margin-right: 10px;
+              text-align: right;
+              font-size: 12px;
+              color: gray;
+            ">
+          0 / 150
+        </div>
+        <br />
+
+
+
+        <label for="Emeroccupation"><b>Occupation</b>: *&nbsp;</label>
+        <input type="text" name="Emeroccupation" placeholder="Occupation" data-target="Emeroccupation"  />
+        <br /><br />
+
+        <label for="EmerphoneNo"><b>Phone Number</b>: *&nbsp;</label>
+        <input type="tel" name="EmerphoneNo" placeholder="Phone Number" data-target="EmerphoneNo"
+           /><br /><br />
+
+        <label for="Emeremail"><b>Email Address</b>: *&nbsp;</label>
+        <input type="email" name="Emeremail" placeholder="Email Address" data-target="Emeremail" 
+          style="width: 60%;" /><br /><br />
+
+      </form>
+
+
+
+      <h5>Past visits or stays in Japan</h5>
+      <label><b>List from your most recent visits.</b> </label> <br><br>
+      <form id="applicationForm" class="appform">
+
+
+        <label for="VisitFmonth"><b>From</b>:&nbsp;</label>
+        <input type="month" data-date-target="VisitFMonth" name="VisitFMonth" data-year-target="VisitFyear"
+          data-month-target="VisitFmonth" /> <br><br>
+        <label for="VisitTmonth"><b>To</b>:&nbsp;</label>
+        <input type="month" data-date-target="VisitTMonth" name="VisitTMonth" data-year-target="VisitTyear"
+          data-month-target="VisitTmonth" /> <br><br><br>
+
+        <label for="VisitPurpose"><b>Purpose</b>:&nbsp;</label><br><br>
+        <textarea name="Visit" placeholder="Purpose of your visit to Japan." style="width: 100%; height: 70px"
+          data-lower-case="true" data-target="VisitPurpose" data-counter="VisitCount" maxlength="50"></textarea>
+        <div id="VisitCount" style="
+            margin-right: 10px;
+            text-align: right;
+            font-size: 12px;
+            color: gray;
+          ">
+          0 / 50
+        </div><br><br><br>
+
+
+
+        <label for="VisitFmonth2"><b>From</b>:&nbsp;</label>
+        <input type="month" data-date-target="VisitFMonth2" name="VisitFMonth2" data-year-target="VisitFyear2"
+          data-month-target="VisitFmonth2" /> <br><br>
+        <label for="VisitTmonth2"><b>To</b>:&nbsp;</label>
+        <input type="month" data-date-target="VisitTMonth2" name="VisitTMonth2" data-year-target="VisitTyear2"
+          data-month-target="VisitTmonth2" /> <br><br><br>
+
+        <label for="Visit2Purpose"><b>Purpose</b>:&nbsp;</label><br><br>
+        <textarea name="Visit2Purpose" placeholder="Purpose of your visit to Japan." style="width: 100%; height: 70px"
+          data-lower-case="true" data-target="Visit2Purpose" data-counter="Visit2PurposeCount"
+          maxlength="50"></textarea>
+        <div id="Visit2PurposeCount" style="
+          margin-right: 10px;
+          text-align: right;
+          font-size: 12px;
+          color: gray;
+        ">
+          0 / 50
+        </div><br><br>
+
+
+        <div class="finalcheck">
+          <input type="checkbox" name="finalcheck" value="✔" data-target="finalCheck"  />
+          <label for="finalCheck"><b>I understand and accept all the conditions stated in the Application Guidelines for
+              Japanese Government (MEXT) Scholarship for FY2024, and upon confirmation of my qualifications for
+              application as stated above, I hereby apply for this scholarship.</b></label>
+        </div><br><br>
+
+
+
+        <label for="DOA"><b>Please fill the desired Date of application or choose today<b></label><br><br>
+        <label for="DOA"><b>Date of Application</b>: *&nbsp;</label>
+        <input type="date" data-date-target="DOA" name="DOA" data-year-target="DOAYear" data-month-target="DOAMonth"
+          data-day-target="DOADay"  data-split-target="true"  />
+        <br /><br />
+
+      </form>
+
+
+      <button id="previewSubmitBtn" type="button" data-button-target="previewbutton">Preview Final Application</button>
+
+
+
+    </div>
+  </div>
+
+
+  <button id="togglePreviewBtn">Show Preview</button>
+
+  <script src="../js/form.js"></script>
+</body>
+
+</html>

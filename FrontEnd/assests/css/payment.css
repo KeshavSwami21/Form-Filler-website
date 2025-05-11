@@ -1,0 +1,72 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  body {
+    background-color: #f4f2f7;
+    color: #333;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  .container {
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .payment-status {
+    background-color: #fff;
+    margin: auto;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+  }
+  
+  .payment-status h1 {
+    color: #6200ee;
+    margin-bottom: 20px;
+    font-size: 2rem;
+  }
+  
+  .payment-status p {
+    margin-bottom: 30px;
+    color: #555;
+    font-size: 1rem;
+  }
+  
+  .payment-status button {
+    padding: 12px 20px;
+    background-color: #6200ee;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+  }
+  
+  .payment-status button:hover {
+    background-color: #3700b3;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 480px) {
+    .payment-status {
+      padding: 30px 20px;
+    }
+  
+    .payment-status h1 {
+      font-size: 1.5rem;
+    }
+  }
+  

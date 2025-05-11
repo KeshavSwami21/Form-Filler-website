@@ -1,0 +1,265 @@
+/* Layout and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  body {
+    background-color: #f4f2f7;
+    color: #333;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .left-preview {
+    position: relative;
+    flex: 7;
+    background-color: #fff;
+    overflow: hidden;
+    background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.05) 0, rgba(0, 0, 0, 0.05) 1px, transparent 1px, transparent 20px),
+      repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.05) 0, rgba(0, 0, 0, 0.05) 1px, transparent 1px, transparent 20px);
+  }
+  
+  .left-preview::before {
+    content: "MEXT Form Filler \A \A MEXT Form Filler \A \A MEXT Form Filler \A \A MEXT Form Filler \A \A MEXT Form Filler \A \A MEXT Form Filler";
+    white-space: pre;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(0, 0, 0, 0.637);
+    font-size: 4rem;
+    z-index: 1;
+    pointer-events: none;
+    text-align: center;
+    line-height: 1.5;
+  }
+  
+  .left-preview iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    pointer-events: auto;
+  }
+  
+  .left-preview .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  .right-form {
+    flex: 3;
+    background-color: #f5f5f5;
+    padding: 40px;
+    overflow-y: auto;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .right-form h2, h5 {
+    margin-bottom: 20px;
+    color: #6200ee;
+    font-size: 1.8rem;
+  }
+
+  /* .right-form .appform{
+    display: flex;
+    flex-wrap: wrap;
+  } */
+  
+  .right-form label {
+    /* display: block; */
+    margin-top: 15px;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  
+  .right-form input,
+  .right-form textarea {
+    /* width: 49.5%; */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+  
+  .right-form input:focus,
+  .right-form textarea:focus {
+    border-color: #6200ee;
+  }
+  
+  .right-form button {
+    margin-top: 20px;
+    padding: 12px;
+    width: 100%;
+    background-color: #6200ee;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .right-form button:hover {
+    background-color: #3700b3;
+  }
+
+
+
+/* Modal styles */
+#cropperModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* Set the modal width to 60% of the screen */
+  height: 100%; /* Full screen height */
+  background: rgba(0, 0, 0, 0.7);
+  display: none; /* Initially hidden */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Container for image and buttons */
+#cropperContainer {
+  display: flex;
+  flex-direction: row; /* Horizontal layout */
+  justify-content: flex-start; /* Align items to the start of the container */
+  align-items: center; /* Vertically align the items */
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  width: 70%; /* Take the full width of the modal */
+  max-height: 80%; /* Limit height to 80% of the screen height */
+  overflow: hidden;
+  gap: 20px; /* Adds some space between image and buttons */
+}
+
+/* Image container */
+#imageToCrop {
+  max-width: 100%;
+  max-height: 80vh; /* Limit the image height to 80% of the viewport height */
+  object-fit: cover;
+  display: block; /* Ensures image is displayed correctly */
+}
+
+/* Button container */
+#buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; /* Center align buttons */
+  max-height: 400px; /* Limit the height to match image height */
+  height: 100%;
+}
+
+/* Buttons styling */
+button {
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%; /* Make buttons fill the width of the button container */
+}
+
+
+.finalcheck{
+  display: flex;
+  align-items: baseline;
+}
+
+.finalcheck label{
+  margin-left: 10px;
+  text-align: justify;
+}
+
+.error-msg {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+
+
+/* Floating toggle preview button (mobile only) */
+#togglePreviewBtn {
+  width: 15vw; /* Makes the button width relative to the viewport width */
+  display: none;
+  position: fixed;
+  top: 30px;
+  right: 10px;
+  background-color: #6200ee;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 20px;
+  font-size: 16px;
+  z-index: 10000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+/* Show button and hide preview iframe on small screens */
+@media (max-width: 768px) {
+
+
+  #togglePreviewBtn {
+    width: 20vw; /* Increase width proportionally for smaller screens */
+    font-size: 14px; /* Adjust font size for smaller screens */
+    padding: 10px 15px; /* Adjust padding for smaller screens */
+  }
+
+  
+  .left-preview {
+    display: none;
+  }
+  
+
+  .left-preview.show {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 9999;
+    background: white;
+    width: 100%;
+  }
+
+
+
+  #togglePreviewBtn {
+    display: block;
+  }
+}
+
+
+@media (max-width: 480px) {
+  #togglePreviewBtn {
+    width: 25vw; /* Further increase width proportionally for very small screens */
+    font-size: 12px; /* Adjust font size for very small screens */
+    padding: 8px 12px; /* Adjust padding for very small screens */
+  }
+}
+
+
