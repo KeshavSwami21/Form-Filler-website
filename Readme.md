@@ -172,7 +172,7 @@ The frontend communicates with these core endpoints:
 
 ## 📄 License
 
-This project is licensed under the MIT License.  
+This project is open source.  
 Feel free to fork, modify, and contribute!
 
 ---
